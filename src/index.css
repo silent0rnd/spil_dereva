@@ -1,0 +1,39 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Lora", Georgia, serif;
+  --font-serif: "Lora", Georgia, serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+
+  /* Custom natural forest & wood color tones updated for "Natural Tones" theme */
+  --color-forest-50: #f4f1ea;   /* Warm light sand/linen background */
+  --color-forest-100: #e8e4d9;  /* Mellow highlighted beige */
+  --color-forest-200: #d5cfc1;  /* Deeper beige-sand border */
+  --color-forest-300: #a7bca6;  /* Soft sage green accent */
+  --color-forest-400: #6b8f71;  /* Medium sage */
+  --color-forest-500: #4a6d55;  /* Deep mellow sage */
+  --color-forest-600: #3e5c4a;  /* Core Theme Green */
+  --color-forest-700: #2d4739;  /* Core Dark Forest Green */
+  --color-forest-800: #21352a;  /* Very dark green-charcoal */
+  --color-forest-900: #1b2a21;  /* Deep charcoal-green */
+  --color-forest-950: #121e15;  /* Rich green-black */
+
+  --color-bark-50: #faf6f0;
+  --color-bark-100: #e8e4d9;
+  --color-bark-600: #8c6a51;    /* Earthy brown tones */
+  --color-bark-700: #73543f;
+  --color-bark-800: #5c4332;
+  --color-bark-900: #453225;
+}
+
+/* Custom animations and utility styles */
+.gradient-overlay {
+  background: linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.6) 100%);
+}
+
+.text-stroke {
+  -webkit-text-stroke: 1px currentColor;
+}
+
