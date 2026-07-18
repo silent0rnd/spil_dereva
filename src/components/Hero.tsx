@@ -4,6 +4,7 @@
  */
 
 import { ShieldCheck, CalendarCheck, HelpCircle, ArrowRight } from 'lucide-react';
+import heroImage from '../assets/images/arborist_hero_bg_1784384176446.jpg';
 
 interface HeroProps {
   onOpenCallbackModal: (serviceId?: string) => void;
@@ -20,7 +21,7 @@ export default function Hero({ onOpenCallbackModal, onScrollToCalculator }: Hero
       <div className="absolute inset-0 z-0">
         <img
           id="hero-bg-image"
-          src="/src/assets/images/arborist_hero_bg_1784384176446.jpg"
+          src={heroImage}
           alt="Арбористы за работой"
           className="w-full h-full object-cover object-center opacity-40 scale-105 animate-pulse-slow"
           referrerPolicy="no-referrer"

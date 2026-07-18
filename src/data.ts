@@ -4,6 +4,18 @@
  */
 
 import { Service, FAQItem, Review, GalleryItem, CaseStudy } from './types';
+import beforeWildYard from './assets/images/before_wild_yard_1784384194076.jpg';
+import afterCleanYard from './assets/images/after_clean_yard_1784384211822.jpg';
+import spilMytishhi from './assets/images/spil_mytishhi_1784386200634.jpg';
+import spilMytishhiAfter from './assets/images/spil_mytishhi_2_1784386548851.jpg';
+import spilLuzhki from './assets/images/spil_luzhki_1784386222900.jpg';
+import spilLuzhkiAfter from './assets/images/spil_luzhki_2_1784386567392.jpg';
+import spilVoronovo from './assets/images/spil_voronovo_1784386240727.jpg';
+import spilVoronovoAfter from './assets/images/spil_voronovo_2_1784386585419.jpg';
+import spilNaroFominsk from './assets/images/spil_naro_fominsk_1784386259078.jpg';
+import spilNaroFominskAfter from './assets/images/spil_naro_fominsk_2_1784386605503.jpg';
+import spilVlasovo from './assets/images/spil_vlasovo_1784386277963.jpg';
+import spilVlasovoAfter from './assets/images/spil_vlasovo_2_1784386622511.jpg';
 
 export const SERVICES: Service[] = [
   {
@@ -83,8 +95,8 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     id: 'pine-over-roof',
     title: 'Спил вековой сосны над жилым домом',
     description: 'Дерево высотой 27 метров с трещиной в стволе угрожало обрушением на крышу коттеджа. Спилено частями с аккуратным завешиванием и спуском каждой ветки.',
-    beforeImage: '/src/assets/images/before_wild_yard_1784384194076.jpg',
-    afterImage: '/src/assets/images/after_clean_yard_1784384211822.jpg'
+    beforeImage: beforeWildYard,
+    afterImage: afterCleanYard
   }
 ];
 
@@ -103,8 +115,8 @@ export const CASE_STUDIES: CaseStudy[] = [
       'Измельчение порубочных остатков в технологическую щепу'
     ],
     images: [
-      '/src/assets/images/spil_mytishhi_1784386200634.jpg',
-      '/src/assets/images/spil_mytishhi_2_1784386548851.jpg'
+      spilMytishhi,
+      spilMytishhiAfter
     ],
     url: 'https://spilservis.ru/our-works/spil-elej-mytishhi/'
   },
@@ -122,8 +134,8 @@ export const CASE_STUDIES: CaseStudy[] = [
       'Засыпка котлована и выравнивание территории под газон'
     ],
     images: [
-      '/src/assets/images/spil_luzhki_1784386222900.jpg',
-      '/src/assets/images/spil_luzhki_2_1784386567392.jpg'
+      spilLuzhki,
+      spilLuzhkiAfter
     ],
     url: 'https://spilservis.ru/our-works/spil-avarijnoj-berezy-i-korchevanie-pnya-luzhki/'
   },
@@ -141,8 +153,8 @@ export const CASE_STUDIES: CaseStudy[] = [
       'Полная уборка территории от опилок и листьев'
     ],
     images: [
-      '/src/assets/images/spil_voronovo_1784386240727.jpg',
-      '/src/assets/images/spil_voronovo_2_1784386585419.jpg'
+      spilVoronovo,
+      spilVoronovoAfter
     ],
     url: 'https://spilservis.ru/our-works/spil-avarijnyh-derevev-voronovo/'
   },
@@ -160,8 +172,8 @@ export const CASE_STUDIES: CaseStudy[] = [
       'Складирование готовых дров в дровницу заказчика'
     ],
     images: [
-      '/src/assets/images/spil_naro_fominsk_1784386259078.jpg',
-      '/src/assets/images/spil_naro_fominsk_2_1784386605503.jpg'
+      spilNaroFominsk,
+      spilNaroFominskAfter
     ],
     url: 'https://spilservis.ru/our-works/spil-avarijnyh-elej-naro-fominsk/'
   },
@@ -179,8 +191,8 @@ export const CASE_STUDIES: CaseStudy[] = [
       'Сохранение целостности уложенной тротуарной плитки'
     ],
     images: [
-      '/src/assets/images/spil_vlasovo_1784386277963.jpg',
-      '/src/assets/images/spil_vlasovo_2_1784386622511.jpg'
+      spilVlasovo,
+      spilVlasovoAfter
     ],
     url: 'https://spilservis.ru/our-works/spil-berezy-i-korchevanie-pnya-vlasovo/'
   }
