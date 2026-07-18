@@ -1,6 +1,0 @@
-{
-  "name": "Спил деревьев",
-  "description": "Профессиональный сайт услуг по спилу, удалению и обрезке деревьев любой сложности. Расчет стоимости, калькулятор услуг, галерея работ и вызов специалиста.",
-  "requestFramePermissions": [],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
-}
