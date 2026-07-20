@@ -126,9 +126,21 @@ export default function Footer() {
           <div className="font-light">
             © {currentYear} Спил Деревьев. Все права защищены.
           </div>
-          <div className="flex flex-wrap gap-x-6 gap-y-2 justify-center font-light">
+          <div className="flex flex-wrap items-center gap-x-6 gap-y-2 justify-center font-light">
             <span>Информация на сайте не является публичной офертой.</span>
             <span>Политика конфиденциальности</span>
+            <span className="text-gray-600">•</span>
+            <span className="tracking-[0.01em]">
+              Сайт разработан{' '}
+              <a
+                href="https://naklikay.ru/"
+                target="_blank"
+                rel="noopener"
+                className="text-forest-400 underline decoration-forest-600/80 underline-offset-4 transition-colors hover:text-forest-300"
+              >
+                Максимом Мирошниковым
+              </a>
+            </span>
           </div>
         </div>
 
