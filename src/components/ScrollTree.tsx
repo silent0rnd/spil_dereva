@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import {
   motion,
   useMotionValueEvent,
@@ -12,6 +12,7 @@ import {
   useTransform,
   type MotionValue
 } from 'motion/react';
+import { useMediaQuery } from '../lib/useMediaQuery';
 
 /**
  * A tree that gets taken down while you read the page.
@@ -51,32 +52,23 @@ interface BranchConfig {
   cutAt: number;
 }
 
-/** Thresholds line up with the page sections — see the plan for the mapping. */
+/**
+ * Thresholds are tuned to where the sections actually sit in scroll progress:
+ * services 0.21, calculator 0.40, gallery 0.55, reviews 0.69, proof band 0.78,
+ * FAQ 0.89, CTA 0.98. Re-measure after adding or removing a section.
+ */
 const BRANCHES: BranchConfig[] = [
-  { id: 'b1', x: 63, y: 88, length: 46, side: 'right', cutAt: 0.18 },
-  { id: 'b2', x: 57, y: 128, length: 42, side: 'left', cutAt: 0.32 },
-  { id: 'b3', x: 64, y: 176, length: 50, side: 'right', cutAt: 0.46 },
-  { id: 'b4', x: 56, y: 222, length: 46, side: 'left', cutAt: 0.58 },
-  { id: 'b5', x: 65, y: 268, length: 40, side: 'right', cutAt: 0.7 }
+  { id: 'b1', x: 63, y: 88, length: 46, side: 'right', cutAt: 0.1 },
+  { id: 'b2', x: 57, y: 128, length: 42, side: 'left', cutAt: 0.21 },
+  { id: 'b3', x: 64, y: 176, length: 50, side: 'right', cutAt: 0.38 },
+  { id: 'b4', x: 56, y: 222, length: 46, side: 'left', cutAt: 0.54 },
+  { id: 'b5', x: 65, y: 268, length: 40, side: 'right', cutAt: 0.67 }
 ];
 
-const TRUNK_CUT_AT = 0.8;
-const STUMP_GRIND_AT = 0.9;
+/** Tree comes down over the proof band, gets ground away during the FAQ. */
+const TRUNK_CUT_AT = 0.76;
+const STUMP_GRIND_AT = 0.87;
 const SPROUT_AT = 0.96;
-
-function useMediaQuery(query: string) {
-  const [matches, setMatches] = useState(false);
-
-  useEffect(() => {
-    const mql = window.matchMedia(query);
-    setMatches(mql.matches);
-    const onChange = (event: MediaQueryListEvent) => setMatches(event.matches);
-    mql.addEventListener('change', onChange);
-    return () => mql.removeEventListener('change', onChange);
-  }, [query]);
-
-  return matches;
-}
 
 function branchPath({ x, y, length, side }: BranchConfig) {
   const dir = side === 'right' ? 1 : -1;
@@ -164,6 +156,57 @@ const TRUNK_PATH = `M${TRUNK_X - 10},${GROUND_Y}
   C${TRUNK_X + 4},56 ${TRUNK_X + 4},80 ${TRUNK_X + 5},120
   C${TRUNK_X + 7},200 ${TRUNK_X + 9},300 ${TRUNK_X + 10},${GROUND_Y} Z`;
 
+/**
+ * The climber. Hangs on the left of the trunk, rides down from branch to branch
+ * and does the cutting — the branches used to just fall off on their own, which
+ * read as the tree falling apart rather than as work being done.
+ *
+ * `sawing` runs the chainsaw wobble; it stops once there is nothing left to cut.
+ */
+function Climber({ sawing }: { sawing: boolean }) {
+  // Drawn in local units around (0, 0) = where the saw meets the trunk, then
+  // scaled up as a whole. At 1:1 in viewBox units the figure came out ~14px on
+  // screen and the helmet collapsed into a dot.
+  return (
+    <g transform={`translate(${TRUNK_X - 5} 0) scale(1.7)`}>
+      {/* Safety line back around the trunk */}
+      <path
+        d="M-15,-3 C-9,-7 -3,-7 1,-4"
+        stroke="var(--color-safety-400)"
+        strokeWidth={0.9}
+        strokeLinecap="round"
+        fill="none"
+        opacity={0.9}
+      />
+
+      {/* Legs braced against the trunk — the feet have to land past x=0, which
+          is the trunk's left edge, otherwise he reads as floating beside it. */}
+      <path d="M-15,4 L-6,2 L2,2" stroke="var(--color-forest-900)" strokeWidth={2.4} strokeLinecap="round" strokeLinejoin="round" fill="none" />
+      <path d="M-15,6 L-7,8 L2,7" stroke="var(--color-forest-900)" strokeWidth={2.4} strokeLinecap="round" strokeLinejoin="round" fill="none" />
+
+      {/* Harness */}
+      <path d="M-17,3 L-14,4" stroke="var(--color-safety-600)" strokeWidth={1.6} strokeLinecap="round" />
+
+      {/* Torso */}
+      <path d="M-18,-3 L-16,5" stroke="var(--color-safety-500)" strokeWidth={5} strokeLinecap="round" />
+
+      {/* Helmet with brim */}
+      <circle cx={-19} cy={-8} r={3.2} fill="var(--color-safety-500)" />
+      <path d="M-22.5,-9 L-15.5,-9" stroke="var(--color-safety-600)" strokeWidth={1.3} strokeLinecap="round" />
+
+      {/* Arms + chainsaw, biting into the trunk */}
+      <g
+        className={sawing ? 'animate-saw' : undefined}
+        style={{ transformBox: 'fill-box', transformOrigin: '20% 50%' }}
+      >
+        <path d="M-16,-1 L-11,0" stroke="var(--color-safety-500)" strokeWidth={2.4} strokeLinecap="round" />
+        <rect x={-12} y={-2.6} width={5.2} height={5.2} rx={1.3} fill="var(--color-forest-900)" />
+        <path d="M-7,0 L0,0" stroke="var(--color-ink-300)" strokeWidth={1.8} strokeLinecap="round" />
+      </g>
+    </g>
+  );
+}
+
 function StaticTree() {
   return (
     <g>
@@ -186,6 +229,9 @@ function StaticTree() {
           </g>
         );
       })}
+      <g transform={`translate(0 ${BRANCHES[0].y})`}>
+        <Climber sawing={false} />
+      </g>
     </g>
   );
 }
@@ -195,10 +241,13 @@ export default function ScrollTree() {
   const isWide = useMediaQuery('(min-width: 1280px)');
   const { scrollYProgress } = useScroll();
   const [isFelled, setIsFelled] = useState(false);
+  const [isWorking, setIsWorking] = useState(true);
 
   useMotionValueEvent(scrollYProgress, 'change', (latest) => {
     const felled = latest > BRANCHES[0].cutAt;
     setIsFelled((current) => (current === felled ? current : felled));
+    const working = latest < SPROUT_AT;
+    setIsWorking((current) => (current === working ? current : working));
   });
 
   // Trunk drops away once the crown is gone.
@@ -227,9 +276,18 @@ export default function ScrollTree() {
   const sproutScale = useTransform(scrollYProgress, [SPROUT_AT, 1], [0, 1]);
   const sproutOpacity = useTransform(scrollYProgress, [SPROUT_AT, SPROUT_AT + 0.02], [0, 1]);
 
-  // Reading progress: the cut marker travels down the trunk.
-  const markerY = useTransform(scrollYProgress, [0, TRUNK_CUT_AT], [50, 330]);
-  const markerOpacity = useTransform(scrollYProgress, [0, 0.04, TRUNK_CUT_AT, TRUNK_CUT_AT + 0.02], [0, 0.55, 0.55, 0]);
+  // The climber rides down the trunk, stopping at each branch he is about to
+  // cut, and ends up at the stump. Doubles as the reading progress indicator.
+  const climberY = useTransform(
+    scrollYProgress,
+    [0, BRANCHES[0].cutAt, BRANCHES[1].cutAt, BRANCHES[2].cutAt, BRANCHES[3].cutAt, BRANCHES[4].cutAt, TRUNK_CUT_AT, STUMP_GRIND_AT],
+    [BRANCHES[0].y, BRANCHES[0].y, BRANCHES[1].y, BRANCHES[2].y, BRANCHES[3].y, BRANCHES[4].y, GROUND_Y - 32, GROUND_Y - 16]
+  );
+  const climberOpacity = useTransform(
+    scrollYProgress,
+    [0, 0.02, SPROUT_AT - 0.02, SPROUT_AT],
+    [0, 1, 1, 0]
+  );
 
   /** Everything that rotates or scales pivots on the base of the trunk. */
   const basePivot = pivot(TRUNK_X, GROUND_Y);
@@ -240,9 +298,11 @@ export default function ScrollTree() {
     <div
       id="scroll-tree"
       aria-hidden="true"
-      className="pointer-events-none fixed right-4 2xl:right-10 top-1/2 z-30 hidden -translate-y-1/2 xl:block"
+      className="pointer-events-none fixed right-2 2xl:right-8 top-1/2 z-30 hidden -translate-y-1/2 xl:block"
     >
-      <svg viewBox="0 0 120 400" className="h-[62vh] w-[86px]" fill="none" role="presentation">
+      {/* Wider than strictly needed for the tree: at 86px the climber's helmet
+          collapsed into a dot. */}
+      <svg viewBox="0 0 120 400" className="h-[68vh] w-[124px]" fill="none" role="presentation">
         {/* Ground */}
         <line
           x1={20}
@@ -291,18 +351,9 @@ export default function ScrollTree() {
               ))}
             </g>
 
-            {/* Cut marker — also the reading progress indicator */}
-            <motion.g style={{ y: markerY, opacity: markerOpacity }}>
-              <line
-                x1={TRUNK_X - 18}
-                y1={0}
-                x2={TRUNK_X + 18}
-                y2={0}
-                stroke="var(--color-forest-400)"
-                strokeWidth={1.5}
-                strokeLinecap="round"
-                strokeDasharray="4 3"
-              />
+            {/* The climber doing the cutting — also the progress indicator */}
+            <motion.g style={{ y: climberY, opacity: climberOpacity }}>
+              <Climber sawing={isWorking} />
             </motion.g>
 
             {/* Stump with growth rings */}

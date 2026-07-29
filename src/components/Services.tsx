@@ -4,10 +4,11 @@
  */
 
 import React from 'react';
-import { SERVICES } from '../data';
+import { SERVICES, CONTACTS } from '../data';
 import { ArrowDownCircle, Layers, Scissors, Shrink, Trees, Check, ArrowRight } from 'lucide-react';
 import SectionHeading from './ui/SectionHeading';
 import Reveal from './ui/Reveal';
+import { Magnetic, SpotlightPanel, Tilt } from './ui/pointer';
 
 interface ServicesProps {
   onOpenCallbackModal: (serviceId?: string) => void;
@@ -31,7 +32,22 @@ export default function Services({ onOpenCallbackModal }: ServicesProps) {
           eyebrow="Наши услуги"
           title="Решаем любые задачи с деревьями и участками"
           subtitle="Профессиональные сертифицированные арбористы со снаряжением 1-го класса и европейским инструментом. Работаем строго по регламентам безопасности."
+          align="left"
           className="mb-16 md:mb-24"
+          aside={
+            <Reveal delay={0.2}>
+              <dl className="border-t border-forest-200 pt-5 space-y-4">
+                <div>
+                  <dt className="text-xs uppercase tracking-widest text-ink-400 font-bold">График</dt>
+                  <dd className="text-sm text-ink-800 font-medium mt-1">{CONTACTS.hoursLong}</dd>
+                </div>
+                <div>
+                  <dt className="text-xs uppercase tracking-widest text-ink-400 font-bold">Выезд и оценка</dt>
+                  <dd className="text-sm text-ink-800 font-medium mt-1">Бесплатно, в день обращения</dd>
+                </div>
+              </dl>
+            </Reveal>
+          }
         />
 
         {/* Services Grid */}
@@ -40,9 +56,10 @@ export default function Services({ onOpenCallbackModal }: ServicesProps) {
             const IconComponent = iconMap[service.iconName] || Trees;
             return (
               <Reveal key={service.id} delay={(index % 3) * 0.08} className="h-full">
+                <Tilt className="h-full">
                 <div
                   id={`service-card-${service.id}`}
-                  className="group relative flex h-full flex-col bg-white border border-ink-100 rounded-panel p-6 lg:p-8 shadow-card hover:shadow-card-hover hover:-translate-y-1.5 transition-all duration-300"
+                  className="group relative flex h-full flex-col bg-white border border-ink-100 rounded-panel p-6 lg:p-8 shadow-card hover:shadow-card-hover transition-shadow duration-300"
                 >
                   {/* Icon & Price */}
                   <div className="flex items-center justify-between mb-6">
@@ -88,6 +105,7 @@ export default function Services({ onOpenCallbackModal }: ServicesProps) {
                     <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                   </button>
                 </div>
+                </Tilt>
               </Reveal>
             );
           })}
@@ -95,12 +113,11 @@ export default function Services({ onOpenCallbackModal }: ServicesProps) {
 
         {/* Bottom Banner */}
         <Reveal>
-          <div
-            id="services-bottom-banner"
-            className="on-dark mt-16 bg-gradient-to-r from-forest-800 to-forest-950 rounded-panel p-8 lg:p-12 text-white shadow-panel relative overflow-hidden"
+          <SpotlightPanel
+            className="on-dark mt-16 bg-gradient-to-r from-forest-800 to-forest-950 rounded-panel p-8 lg:p-12 text-white shadow-panel"
+            glowRgb="167 188 166"
           >
-            <div className="absolute top-0 right-0 w-64 h-64 bg-forest-600/10 rounded-full blur-3xl -mr-16 -mt-16" />
-            <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
+            <div id="services-bottom-banner" className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
               <div className="max-w-2xl text-center md:text-left">
                 <span className="text-[10px] font-bold uppercase tracking-widest text-forest-300 bg-forest-700/50 px-3 py-1 rounded-full">
                   Бесплатный расчет по фото
@@ -113,26 +130,30 @@ export default function Services({ onOpenCallbackModal }: ServicesProps) {
                 </p>
               </div>
               <div className="flex flex-col sm:flex-row items-stretch gap-4 shrink-0 w-full md:w-auto">
-                <button
-                  id="banner-calculate-btn"
-                  onClick={() => {
-                    const element = document.getElementById('calculator');
-                    if (element) element.scrollIntoView({ behavior: 'smooth' });
-                  }}
-                  className="px-6 py-3.5 bg-white text-forest-900 hover:bg-forest-50 font-bold text-sm rounded-btn text-center transition-all hover:-translate-y-0.5 cursor-pointer"
-                >
-                  Рассчитать в калькуляторе
-                </button>
-                <button
-                  id="banner-contact-btn"
-                  onClick={() => onOpenCallbackModal()}
-                  className="px-6 py-3.5 bg-forest-600 hover:bg-forest-500 border border-forest-500 text-white font-bold text-sm rounded-btn text-center transition-all hover:-translate-y-0.5 cursor-pointer"
-                >
-                  Оценить по фото
-                </button>
+                <Magnetic>
+                  <button
+                    id="banner-calculate-btn"
+                    onClick={() => {
+                      const element = document.getElementById('calculator');
+                      if (element) element.scrollIntoView({ behavior: 'smooth' });
+                    }}
+                    className="w-full px-6 py-3.5 bg-white text-forest-900 hover:bg-forest-50 font-bold text-sm rounded-btn text-center transition-colors cursor-pointer"
+                  >
+                    Рассчитать в калькуляторе
+                  </button>
+                </Magnetic>
+                <Magnetic>
+                  <button
+                    id="banner-contact-btn"
+                    onClick={() => onOpenCallbackModal()}
+                    className="w-full px-6 py-3.5 bg-forest-600 hover:bg-forest-500 border border-forest-500 text-white font-bold text-sm rounded-btn text-center transition-colors cursor-pointer"
+                  >
+                    Оценить по фото
+                  </button>
+                </Magnetic>
               </div>
             </div>
-          </div>
+          </SpotlightPanel>
         </Reveal>
 
       </div>

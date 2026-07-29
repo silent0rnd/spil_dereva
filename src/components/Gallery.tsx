@@ -71,12 +71,13 @@ export default function Gallery({ onOpenCallbackModal }: GalleryProps) {
           eyebrow="Наше портфолио"
           title="Посмотрите на наши результаты"
           subtitle="Реальные примеры выполненных нами работ с подробным разбором задач, технологических этапов и примененного оборудования."
-          className="mb-16"
+          align="left"
+          className="mb-12"
         />
 
         {/* Tab Selection */}
         <Reveal>
-          <div className="flex flex-wrap justify-center gap-2 mb-12">
+          <div className="flex flex-wrap gap-2 mb-12">
             {CASE_STUDIES.map((study, index) => (
               <button
                 key={study.id}

@@ -11,6 +11,7 @@ import { CalculatorParams } from '../types';
 import SectionHeading from './ui/SectionHeading';
 import Reveal from './ui/Reveal';
 import CountUp from './ui/CountUp';
+import { SpotlightPanel } from './ui/pointer';
 
 interface CalculatorProps {
   onOpenCallbackModal: (serviceId?: string, calcDetails?: string) => void;
@@ -324,10 +325,10 @@ export default function CalculatorComponent({ onOpenCallbackModal }: CalculatorP
 
           {/* Results Card - Right Panel */}
           <Reveal delay={0.1} className="lg:col-span-5 lg:sticky lg:top-24">
-            <div
-              id="calculator-results"
-              className="on-dark relative bg-forest-950 text-white rounded-panel p-6 md:p-8 shadow-panel"
+            <SpotlightPanel
+              className="on-dark bg-forest-950 text-white rounded-panel p-6 md:p-8 shadow-panel"
             >
+            <div id="calculator-results" className="relative z-10">
               <div className="flex items-center space-x-2.5 text-forest-400 mb-6">
                 <Calculator className="w-5 h-5" />
                 <span className="text-xs font-bold uppercase tracking-widest">Предварительный расчет</span>
@@ -407,6 +408,7 @@ export default function CalculatorComponent({ onOpenCallbackModal }: CalculatorP
                 <span>Договор гарантирует неизменность сметы</span>
               </div>
             </div>
+            </SpotlightPanel>
           </Reveal>
 
         </div>

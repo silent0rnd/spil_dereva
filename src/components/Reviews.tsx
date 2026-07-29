@@ -7,7 +7,6 @@ import { REVIEWS } from '../data';
 import { Star, ShieldCheck, ThumbsUp } from 'lucide-react';
 import SectionHeading from './ui/SectionHeading';
 import Reveal from './ui/Reveal';
-import CountUp from './ui/CountUp';
 
 export default function Reviews() {
   return (
@@ -74,39 +73,8 @@ export default function Reviews() {
           ))}
         </div>
 
-        {/* Aggregate trust badges */}
-        <Reveal>
-          <div
-            id="reviews-badges"
-            className="mt-16 pt-10 border-t border-ink-100 flex flex-wrap items-center justify-center gap-8 md:gap-16"
-          >
-            <div className="text-center">
-              <span className="block text-3xl font-bold font-display text-ink-900 tabular-nums">
-                <CountUp value={5} decimals={1} />
-              </span>
-              <div className="flex items-center justify-center space-x-0.5 my-1">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-4.5 h-4.5 fill-amber-400 text-amber-400" />
-                ))}
-              </div>
-              <span className="block text-xs text-ink-500 font-light">Средняя оценка на Яндекс.Картах</span>
-            </div>
-
-            <div className="text-center">
-              <span className="block text-3xl font-bold font-display text-ink-900 tabular-nums">
-                <CountUp value={3275} />
-              </span>
-              <span className="block text-xs text-ink-500 font-light mt-1.5">Успешно спиленных дерева</span>
-            </div>
-
-            <div className="text-center">
-              <span className="block text-3xl font-bold font-display text-ink-900 tabular-nums">
-                <CountUp value={100} />%
-              </span>
-              <span className="block text-xs text-ink-500 font-light mt-1.5">Довольных клиентов по договору</span>
-            </div>
-          </div>
-        </Reveal>
+        {/* The aggregate numbers moved to ProofBand, where they get the scale
+            they deserve instead of 30px in the footer of this section. */}
 
       </div>
     </section>

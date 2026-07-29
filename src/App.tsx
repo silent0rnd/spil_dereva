@@ -15,6 +15,7 @@ import FAQ from './components/FAQ';
 import FeedbackForm from './components/FeedbackForm';
 import Footer from './components/Footer';
 import ScrollTree from './components/ScrollTree';
+import ProofBand from './components/ProofBand';
 import MobileCallBar from './components/MobileCallBar';
 import Reveal from './components/ui/Reveal';
 import { CONTACTS } from './data';
@@ -81,34 +82,32 @@ export default function App() {
       />
 
       {/* 3. Steps / Process Timeline Section */}
-      <section id="process-steps" className="py-16 md:py-20 bg-white border-b border-ink-100">
+      <section id="process-steps" className="py-20 md:py-28 bg-white border-b border-ink-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="relative grid grid-cols-1 md:grid-cols-4 gap-8">
-
-            {/* Connector drawn as the section scrolls into view */}
-            <motion.div
-              aria-hidden="true"
-              className="absolute top-6 left-[12%] right-[12%] hidden h-px origin-left bg-ink-200 md:block"
-              initial={shouldReduceMotion ? undefined : { scaleX: 0 }}
-              whileInView={shouldReduceMotion ? undefined : { scaleX: 1 }}
-              viewport={{ once: true, margin: '-80px' }}
-              transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
-            />
-
+          <div className="grid grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
             {STEPS.map((step, index) => (
-              <Reveal key={step.id} delay={index * 0.1} className="relative">
-                <div id={step.id} className="flex items-start space-x-4">
-                  <div className="w-12 h-12 bg-forest-100 text-forest-700 rounded-card flex items-center justify-center font-bold font-mono text-lg shrink-0 ring-4 ring-white">
+              <Reveal key={step.id} delay={index * 0.1}>
+                <div id={step.id}>
+                  {/* Oversized numeral instead of the old beige circle: this is
+                      the first block after the hero and it used to read as filler. */}
+                  <span className="block font-display text-6xl leading-none text-forest-200 tabular-nums">
                     {step.number}
-                  </div>
-                  <div>
-                    <h4 className="text-sm font-bold text-ink-900">{step.title}</h4>
-                    <p className="text-xs text-ink-500 font-light mt-1.5 leading-relaxed">{step.text}</p>
-                  </div>
+                  </span>
+
+                  <motion.span
+                    aria-hidden="true"
+                    className="mt-5 mb-5 block h-px origin-left bg-forest-300"
+                    initial={shouldReduceMotion ? undefined : { scaleX: 0 }}
+                    whileInView={shouldReduceMotion ? undefined : { scaleX: 1 }}
+                    viewport={{ once: true, margin: '-80px' }}
+                    transition={{ duration: 0.7, delay: 0.2 + index * 0.1, ease: [0.22, 1, 0.36, 1] }}
+                  />
+
+                  <h4 className="text-base font-bold font-display text-ink-900">{step.title}</h4>
+                  <p className="mt-2 text-sm text-ink-500 font-light leading-relaxed">{step.text}</p>
                 </div>
               </Reveal>
             ))}
-
           </div>
         </div>
       </section>
@@ -125,7 +124,11 @@ export default function App() {
       {/* 7. Client Reviews and Testimonials */}
       <Reviews />
 
-      {/* 8. Frequently Asked Questions Accordion */}
+      {/* 8. Full-bleed proof band — breaks the stack of cards and carries the
+             aggregate numbers at a scale that actually registers. */}
+      <ProofBand />
+
+      {/* 9. Frequently Asked Questions Accordion */}
       <FAQ />
 
       {/* 9. Floating Contact / Quick Consultation Banner */}

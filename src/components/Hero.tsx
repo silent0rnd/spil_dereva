@@ -7,6 +7,7 @@ import { useRef } from 'react';
 import { motion, useReducedMotion, useScroll, useTransform } from 'motion/react';
 import { ShieldCheck, CalendarCheck, HelpCircle, ArrowRight } from 'lucide-react';
 import { getImage, IMAGES } from '../lib/images';
+import { Magnetic } from './ui/pointer';
 
 interface HeroProps {
   onOpenCallbackModal: (serviceId?: string) => void;
@@ -126,21 +127,25 @@ export default function Hero({ onOpenCallbackModal, onScrollToCalculator }: Hero
             variants={item}
             className="flex flex-col sm:flex-row items-stretch sm:items-center space-y-4 sm:space-y-0 sm:space-x-4 mb-12"
           >
-            <button
-              id="hero-to-calculator-btn"
-              onClick={onScrollToCalculator}
-              className="px-8 py-4 bg-forest-600 hover:bg-forest-700 text-white text-base font-bold rounded-btn transition-all shadow-panel hover:-translate-y-0.5 active:scale-95 flex items-center justify-center space-x-2 cursor-pointer"
-            >
-              <span>Рассчитать стоимость</span>
-              <ArrowRight className="w-5 h-5" />
-            </button>
-            <button
-              id="hero-callback-btn"
-              onClick={() => onOpenCallbackModal()}
-              className="px-8 py-4 bg-forest-900/60 md:bg-white/10 md:hover:bg-white/20 border border-white/20 hover:border-white/40 text-white text-base font-semibold rounded-btn transition-all md:backdrop-blur-sm active:scale-95 flex items-center justify-center cursor-pointer"
-            >
-              Консультация специалиста
-            </button>
+            <Magnetic strength={6}>
+              <button
+                id="hero-to-calculator-btn"
+                onClick={onScrollToCalculator}
+                className="w-full px-8 py-4 bg-forest-600 hover:bg-forest-700 text-white text-base font-bold rounded-btn transition-colors shadow-panel active:scale-95 flex items-center justify-center space-x-2 cursor-pointer"
+              >
+                <span>Рассчитать стоимость</span>
+                <ArrowRight className="w-5 h-5" />
+              </button>
+            </Magnetic>
+            <Magnetic strength={6}>
+              <button
+                id="hero-callback-btn"
+                onClick={() => onOpenCallbackModal()}
+                className="w-full px-8 py-4 bg-forest-900/60 md:bg-white/10 md:hover:bg-white/20 border border-white/20 hover:border-white/40 text-white text-base font-semibold rounded-btn transition-colors md:backdrop-blur-sm active:scale-95 flex items-center justify-center cursor-pointer"
+              >
+                Консультация специалиста
+              </button>
+            </Magnetic>
           </motion.div>
 
           {/* Bullet Points Grid */}

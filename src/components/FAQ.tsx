@@ -26,7 +26,8 @@ export default function FAQ() {
           eyebrow="Частые вопросы"
           title="Отвечаем на популярные вопросы"
           subtitle="Все, что нужно знать о процессе спила деревьев, гарантиях сохранности имущества и ценообразовании."
-          className="mb-16"
+          align="left"
+          className="mb-12"
         />
 
         {/* Accordion List */}

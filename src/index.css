@@ -20,6 +20,12 @@
   --color-forest-900: #1b2a21;  /* Deep charcoal-green */
   --color-forest-950: #121e15;  /* Rich green-black */
 
+  /* Safety orange — the climber's helmet and gear. The only warm accent in an
+     otherwise cool green palette, so the eye catches it immediately. */
+  --color-safety-400: #fb923c;
+  --color-safety-500: #f97316;
+  --color-safety-600: #ea580c;
+
   --color-bark-50: #faf6f0;
   --color-bark-100: #e8e4d9;
   --color-bark-600: #8c6a51;    /* Earthy brown tones */
@@ -61,6 +67,12 @@
   --animate-sway: sway 6s ease-in-out infinite;
   --animate-fade-up: fade-up 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
   --animate-drawer-in: drawer-in 0.22s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-saw: saw 0.16s ease-in-out infinite;
+
+  @keyframes saw {
+    0%, 100% { transform: rotate(-1.8deg); }
+    50%      { transform: rotate(1.8deg); }
+  }
 
   @keyframes ken-burns {
     from { transform: scale(1.04) translate3d(0, 0, 0); }
