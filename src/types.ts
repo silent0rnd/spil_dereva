@@ -23,14 +23,6 @@ export interface CalculatorParams {
   needsCleanUp: boolean;
 }
 
-export interface GalleryItem {
-  id: string;
-  title: string;
-  description: string;
-  beforeImage: string;
-  afterImage: string;
-}
-
 export interface CaseStudy {
   id: string;
   title: string;

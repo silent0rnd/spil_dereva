@@ -1,0 +1,275 @@
+{
+  "after_clean_yard_1784384211822": {
+    "width": 1200,
+    "height": 896,
+    "variants": [
+      {
+        "file": "after_clean_yard_1784384211822-480.webp",
+        "width": 480,
+        "height": 358
+      },
+      {
+        "file": "after_clean_yard_1784384211822-960.webp",
+        "width": 960,
+        "height": 717
+      },
+      {
+        "file": "after_clean_yard_1784384211822-1920.webp",
+        "width": 1200,
+        "height": 896
+      }
+    ]
+  },
+  "arborist_hero_bg_1784384176446": {
+    "width": 1376,
+    "height": 768,
+    "variants": [
+      {
+        "file": "arborist_hero_bg_1784384176446-480.webp",
+        "width": 480,
+        "height": 268
+      },
+      {
+        "file": "arborist_hero_bg_1784384176446-960.webp",
+        "width": 960,
+        "height": 536
+      },
+      {
+        "file": "arborist_hero_bg_1784384176446-1920.webp",
+        "width": 1376,
+        "height": 768
+      }
+    ]
+  },
+  "before_wild_yard_1784384194076": {
+    "width": 1200,
+    "height": 896,
+    "variants": [
+      {
+        "file": "before_wild_yard_1784384194076-480.webp",
+        "width": 480,
+        "height": 358
+      },
+      {
+        "file": "before_wild_yard_1784384194076-960.webp",
+        "width": 960,
+        "height": 717
+      },
+      {
+        "file": "before_wild_yard_1784384194076-1920.webp",
+        "width": 1200,
+        "height": 896
+      }
+    ]
+  },
+  "spil_luzhki_1784386222900": {
+    "width": 1200,
+    "height": 896,
+    "variants": [
+      {
+        "file": "spil_luzhki_1784386222900-480.webp",
+        "width": 480,
+        "height": 358
+      },
+      {
+        "file": "spil_luzhki_1784386222900-960.webp",
+        "width": 960,
+        "height": 717
+      },
+      {
+        "file": "spil_luzhki_1784386222900-1920.webp",
+        "width": 1200,
+        "height": 896
+      }
+    ]
+  },
+  "spil_luzhki_2_1784386567392": {
+    "width": 1408,
+    "height": 768,
+    "variants": [
+      {
+        "file": "spil_luzhki_2_1784386567392-480.webp",
+        "width": 480,
+        "height": 262
+      },
+      {
+        "file": "spil_luzhki_2_1784386567392-960.webp",
+        "width": 960,
+        "height": 524
+      },
+      {
+        "file": "spil_luzhki_2_1784386567392-1920.webp",
+        "width": 1408,
+        "height": 768
+      }
+    ]
+  },
+  "spil_mytishhi_1784386200634": {
+    "width": 1200,
+    "height": 896,
+    "variants": [
+      {
+        "file": "spil_mytishhi_1784386200634-480.webp",
+        "width": 480,
+        "height": 358
+      },
+      {
+        "file": "spil_mytishhi_1784386200634-960.webp",
+        "width": 960,
+        "height": 717
+      },
+      {
+        "file": "spil_mytishhi_1784386200634-1920.webp",
+        "width": 1200,
+        "height": 896
+      }
+    ]
+  },
+  "spil_mytishhi_2_1784386548851": {
+    "width": 1408,
+    "height": 768,
+    "variants": [
+      {
+        "file": "spil_mytishhi_2_1784386548851-480.webp",
+        "width": 480,
+        "height": 262
+      },
+      {
+        "file": "spil_mytishhi_2_1784386548851-960.webp",
+        "width": 960,
+        "height": 524
+      },
+      {
+        "file": "spil_mytishhi_2_1784386548851-1920.webp",
+        "width": 1408,
+        "height": 768
+      }
+    ]
+  },
+  "spil_naro_fominsk_1784386259078": {
+    "width": 1200,
+    "height": 896,
+    "variants": [
+      {
+        "file": "spil_naro_fominsk_1784386259078-480.webp",
+        "width": 480,
+        "height": 358
+      },
+      {
+        "file": "spil_naro_fominsk_1784386259078-960.webp",
+        "width": 960,
+        "height": 717
+      },
+      {
+        "file": "spil_naro_fominsk_1784386259078-1920.webp",
+        "width": 1200,
+        "height": 896
+      }
+    ]
+  },
+  "spil_naro_fominsk_2_1784386605503": {
+    "width": 1408,
+    "height": 768,
+    "variants": [
+      {
+        "file": "spil_naro_fominsk_2_1784386605503-480.webp",
+        "width": 480,
+        "height": 262
+      },
+      {
+        "file": "spil_naro_fominsk_2_1784386605503-960.webp",
+        "width": 960,
+        "height": 524
+      },
+      {
+        "file": "spil_naro_fominsk_2_1784386605503-1920.webp",
+        "width": 1408,
+        "height": 768
+      }
+    ]
+  },
+  "spil_vlasovo_1784386277963": {
+    "width": 1200,
+    "height": 896,
+    "variants": [
+      {
+        "file": "spil_vlasovo_1784386277963-480.webp",
+        "width": 480,
+        "height": 358
+      },
+      {
+        "file": "spil_vlasovo_1784386277963-960.webp",
+        "width": 960,
+        "height": 717
+      },
+      {
+        "file": "spil_vlasovo_1784386277963-1920.webp",
+        "width": 1200,
+        "height": 896
+      }
+    ]
+  },
+  "spil_vlasovo_2_1784386622511": {
+    "width": 1408,
+    "height": 768,
+    "variants": [
+      {
+        "file": "spil_vlasovo_2_1784386622511-480.webp",
+        "width": 480,
+        "height": 262
+      },
+      {
+        "file": "spil_vlasovo_2_1784386622511-960.webp",
+        "width": 960,
+        "height": 524
+      },
+      {
+        "file": "spil_vlasovo_2_1784386622511-1920.webp",
+        "width": 1408,
+        "height": 768
+      }
+    ]
+  },
+  "spil_voronovo_1784386240727": {
+    "width": 1200,
+    "height": 896,
+    "variants": [
+      {
+        "file": "spil_voronovo_1784386240727-480.webp",
+        "width": 480,
+        "height": 358
+      },
+      {
+        "file": "spil_voronovo_1784386240727-960.webp",
+        "width": 960,
+        "height": 717
+      },
+      {
+        "file": "spil_voronovo_1784386240727-1920.webp",
+        "width": 1200,
+        "height": 896
+      }
+    ]
+  },
+  "spil_voronovo_2_1784386585419": {
+    "width": 1408,
+    "height": 768,
+    "variants": [
+      {
+        "file": "spil_voronovo_2_1784386585419-480.webp",
+        "width": 480,
+        "height": 262
+      },
+      {
+        "file": "spil_voronovo_2_1784386585419-960.webp",
+        "width": 960,
+        "height": 524
+      },
+      {
+        "file": "spil_voronovo_2_1784386585419-1920.webp",
+        "width": 1408,
+        "height": 768
+      }
+    ]
+  }
+}

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
 
 @theme {
@@ -26,6 +26,105 @@
   --color-bark-700: #73543f;
   --color-bark-800: #5c4332;
   --color-bark-900: #453225;
+
+  /* Warm neutral ramp. Replaces Tailwind's cold gray-* everywhere: the cold
+     grays fought the warm linen surfaces and were the main source of the
+     generic, templated look. Same hue family as forest-50. */
+  --color-ink-50: #faf8f4;
+  --color-ink-100: #f0ece4;
+  --color-ink-200: #ded8cc;
+  --color-ink-300: #bdb5a6;
+  --color-ink-400: #918a7d;
+  --color-ink-500: #6b655b;
+  --color-ink-600: #4e4a42;
+  --color-ink-700: #3a3630;
+  --color-ink-800: #292621;
+  --color-ink-900: #1a1815;
+
+  /* Radius scale. One rule, no exceptions:
+     button / input -> rounded-btn
+     card           -> rounded-card
+     large panel    -> rounded-panel
+     pill / avatar  -> rounded-full */
+  --radius-btn: 0.875rem;
+  --radius-card: 1.25rem;
+  --radius-panel: 1.75rem;
+
+  /* Warm-tinted shadows (forest-950 based) instead of neutral black. */
+  --shadow-card: 0 1px 2px rgb(18 30 21 / 0.04), 0 8px 24px -12px rgb(18 30 21 / 0.10);
+  --shadow-card-hover: 0 2px 4px rgb(18 30 21 / 0.06), 0 18px 40px -16px rgb(18 30 21 / 0.20);
+  --shadow-panel: 0 4px 8px rgb(18 30 21 / 0.05), 0 32px 64px -32px rgb(18 30 21 / 0.28);
+
+  /* Real keyframes. The codebase previously referenced animate-pulse-slow,
+     animate-fade-in and animate-in, none of which ever existed. */
+  --animate-ken-burns: ken-burns 24s ease-in-out infinite alternate;
+  --animate-sway: sway 6s ease-in-out infinite;
+  --animate-fade-up: fade-up 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-drawer-in: drawer-in 0.22s cubic-bezier(0.22, 1, 0.36, 1) both;
+
+  @keyframes ken-burns {
+    from { transform: scale(1.04) translate3d(0, 0, 0); }
+    to   { transform: scale(1.14) translate3d(-1.5%, -1.5%, 0); }
+  }
+
+  @keyframes sway {
+    0%, 100% { transform: rotate(-0.6deg); }
+    50%      { transform: rotate(0.6deg); }
+  }
+
+  @keyframes fade-up {
+    from { opacity: 0; transform: translate3d(0, 16px, 0); }
+    to   { opacity: 1; transform: translate3d(0, 0, 0); }
+  }
+
+  @keyframes drawer-in {
+    from { opacity: 0; transform: translate3d(0, -8px, 0); }
+    to   { opacity: 1; transform: translate3d(0, 0, 0); }
+  }
+}
+
+/*
+  Type scale — keep headings consistent across sections:
+    H1            text-4xl / sm:text-5xl / lg:text-6xl  font-display font-normal
+    H2 (section)  text-3xl / md:text-4xl / lg:text-5xl  font-display font-normal
+    H3 (card)     text-xl                               font-display font-bold
+    body          text-sm / md:text-base                font-sans font-light
+    micro         text-xs                               font-sans
+
+  Lora ships 400-700 only and JetBrains Mono is loaded 400-700, so never use
+  font-extrabold / font-black on font-display or font-mono — the browser fakes
+  the weight and the result looks smudged. Use size and tracking instead.
+*/
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Guard against a stray horizontal scrollbar: entrance animations and the
+     decorative blur circles briefly reach past the viewport edge. `clip` rather
+     than `hidden` — `hidden` would silently break `position: sticky`, which the
+     calculator result card relies on. */
+  body {
+    overflow-x: clip;
+  }
+
+  ::selection {
+    background-color: var(--color-forest-600);
+    color: white;
+  }
+
+  /* No focus styling existed anywhere before — keyboard users had nothing. */
+  :where(a, button, input, select, textarea, [tabindex]):focus-visible {
+    outline: 2px solid var(--color-forest-600);
+    outline-offset: 2px;
+    border-radius: var(--radius-btn);
+  }
+
+  /* Dark surfaces need the light ring instead. */
+  :where(.on-dark) :where(a, button, input, select, textarea):focus-visible {
+    outline-color: var(--color-forest-300);
+  }
 }
 
 /* Custom animations and utility styles */
@@ -37,3 +136,17 @@
   -webkit-text-stroke: 1px currentColor;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

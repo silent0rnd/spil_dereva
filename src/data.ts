@@ -3,19 +3,23 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { Service, FAQItem, Review, GalleryItem, CaseStudy } from './types';
-import beforeWildYard from './assets/images/before_wild_yard_1784384194076.jpg';
-import afterCleanYard from './assets/images/after_clean_yard_1784384211822.jpg';
-import spilMytishhi from './assets/images/spil_mytishhi_1784386200634.jpg';
-import spilMytishhiAfter from './assets/images/spil_mytishhi_2_1784386548851.jpg';
-import spilLuzhki from './assets/images/spil_luzhki_1784386222900.jpg';
-import spilLuzhkiAfter from './assets/images/spil_luzhki_2_1784386567392.jpg';
-import spilVoronovo from './assets/images/spil_voronovo_1784386240727.jpg';
-import spilVoronovoAfter from './assets/images/spil_voronovo_2_1784386585419.jpg';
-import spilNaroFominsk from './assets/images/spil_naro_fominsk_1784386259078.jpg';
-import spilNaroFominskAfter from './assets/images/spil_naro_fominsk_2_1784386605503.jpg';
-import spilVlasovo from './assets/images/spil_vlasovo_1784386277963.jpg';
-import spilVlasovoAfter from './assets/images/spil_vlasovo_2_1784386622511.jpg';
+import { Service, FAQItem, Review, CaseStudy } from './types';
+
+/**
+ * Single source of truth for contact details. The phone number used to be
+ * hardcoded in six components, which made it easy to miss one when swapping the
+ * placeholder for the real line.
+ */
+export const CONTACTS = {
+  phone: '+7 (495) 123-45-67',
+  phoneHref: 'tel:+74951234567',
+  email: 'info@spil-dereviev.ru',
+  emailHref: 'mailto:info@spil-dereviev.ru',
+  hoursShort: 'Ежедневно: 8:00 – 21:00',
+  hoursLong: 'Без выходных: с 8:00 до 21:00',
+  areaShort: 'Москва и МО',
+  areaLong: 'Москва, Новая Москва, Московская область'
+} as const;
 
 export const SERVICES: Service[] = [
   {
@@ -90,16 +94,6 @@ export const SERVICES: Service[] = [
   }
 ];
 
-export const GALLERY_ITEMS: GalleryItem[] = [
-  {
-    id: 'pine-over-roof',
-    title: 'Спил вековой сосны над жилым домом',
-    description: 'Дерево высотой 27 метров с трещиной в стволе угрожало обрушением на крышу коттеджа. Спилено частями с аккуратным завешиванием и спуском каждой ветки.',
-    beforeImage: beforeWildYard,
-    afterImage: afterCleanYard
-  }
-];
-
 export const CASE_STUDIES: CaseStudy[] = [
   {
     id: 'spil-elej-mytishhi',
@@ -115,8 +109,8 @@ export const CASE_STUDIES: CaseStudy[] = [
       'Измельчение порубочных остатков в технологическую щепу'
     ],
     images: [
-      spilMytishhi,
-      spilMytishhiAfter
+      'spil_mytishhi_1784386200634',
+      'spil_mytishhi_2_1784386548851'
     ],
     url: 'https://spilservis.ru/our-works/spil-elej-mytishhi/'
   },
@@ -134,8 +128,8 @@ export const CASE_STUDIES: CaseStudy[] = [
       'Засыпка котлована и выравнивание территории под газон'
     ],
     images: [
-      spilLuzhki,
-      spilLuzhkiAfter
+      'spil_luzhki_1784386222900',
+      'spil_luzhki_2_1784386567392'
     ],
     url: 'https://spilservis.ru/our-works/spil-avarijnoj-berezy-i-korchevanie-pnya-luzhki/'
   },
@@ -153,8 +147,8 @@ export const CASE_STUDIES: CaseStudy[] = [
       'Полная уборка территории от опилок и листьев'
     ],
     images: [
-      spilVoronovo,
-      spilVoronovoAfter
+      'spil_voronovo_1784386240727',
+      'spil_voronovo_2_1784386585419'
     ],
     url: 'https://spilservis.ru/our-works/spil-avarijnyh-derevev-voronovo/'
   },
@@ -172,8 +166,8 @@ export const CASE_STUDIES: CaseStudy[] = [
       'Складирование готовых дров в дровницу заказчика'
     ],
     images: [
-      spilNaroFominsk,
-      spilNaroFominskAfter
+      'spil_naro_fominsk_1784386259078',
+      'spil_naro_fominsk_2_1784386605503'
     ],
     url: 'https://spilservis.ru/our-works/spil-avarijnyh-elej-naro-fominsk/'
   },
@@ -191,8 +185,8 @@ export const CASE_STUDIES: CaseStudy[] = [
       'Сохранение целостности уложенной тротуарной плитки'
     ],
     images: [
-      spilVlasovo,
-      spilVlasovoAfter
+      'spil_vlasovo_1784386277963',
+      'spil_vlasovo_2_1784386622511'
     ],
     url: 'https://spilservis.ru/our-works/spil-berezy-i-korchevanie-pnya-vlasovo/'
   }

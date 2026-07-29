@@ -23,7 +23,9 @@ export default function Logo({ className = '', size = 'md' }: LogoProps) {
   if (!imgError) {
     return (
       <img
-        src="/logo.png"
+        // The site is served from a base path (/spil_dereva/), so a root-absolute
+        // "/logo.png" 404s and silently falls through to the inline SVG below.
+        src={`${import.meta.env.BASE_URL}logo.png`}
         alt="Логотип"
         className={`${dimensions} ${className} object-contain`}
         onError={() => setImgError(true)}
