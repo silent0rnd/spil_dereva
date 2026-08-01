@@ -88,19 +88,6 @@ export default function Hero({ onOpenCallbackModal, onScrollToCalculator }: Hero
         animate="visible"
       >
         <div className="max-w-3xl">
-          {/* Top Trust Badge */}
-          <motion.div
-            id="hero-trust-badge"
-            variants={item}
-            // Blur from md up only: on phones this sits over a ken-burns image,
-            // and re-blurring an animating backdrop every frame is costly.
-            // A more opaque fill gives the same legibility for free.
-            className="inline-flex items-center space-x-2 bg-forest-900/70 md:bg-forest-500/10 border border-forest-500/30 text-forest-200 px-3.5 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider mb-6 md:backdrop-blur-md"
-          >
-            <ShieldCheck className="w-4 h-4 text-forest-400" />
-            <span>Полная материальная ответственность по договору</span>
-          </motion.div>
-
           {/* Main Headline */}
           <motion.h1
             id="hero-main-title"
