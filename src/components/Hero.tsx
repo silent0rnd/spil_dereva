@@ -3,11 +3,11 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { useRef } from 'react';
-import { motion, useReducedMotion, useScroll, useTransform } from 'motion/react';
+import { useRef, type PointerEvent as ReactPointerEvent } from 'react';
+import { motion, useMotionValue, useReducedMotion, useScroll, useSpring, useTransform } from 'motion/react';
 import { ShieldCheck, CalendarCheck, HelpCircle, ArrowRight } from 'lucide-react';
 import { getImage, IMAGES } from '../lib/images';
-import { Magnetic } from './ui/pointer';
+import { Magnetic, usePointerFine } from './ui/pointer';
 
 interface HeroProps {
   onOpenCallbackModal: (serviceId?: string) => void;
@@ -37,6 +37,12 @@ const BULLETS = [
 export default function Hero({ onOpenCallbackModal, onScrollToCalculator }: HeroProps) {
   const sectionRef = useRef<HTMLElement>(null);
   const shouldReduceMotion = useReducedMotion();
+  const isFinePointer = usePointerFine();
+  const isPointerInteractive = isFinePointer && !shouldReduceMotion;
+
+  const backgroundX = useSpring(useMotionValue(0), { stiffness: 34, damping: 22, mass: 0.8 });
+  const lightX = useSpring(useMotionValue(0), { stiffness: 28, damping: 22, mass: 0.9 });
+  const lightY = useSpring(useMotionValue(0), { stiffness: 28, damping: 22, mass: 0.9 });
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -56,30 +62,69 @@ export default function Hero({ onOpenCallbackModal, onScrollToCalculator }: Hero
         visible: { opacity: 1, y: 0, transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] as const } }
       };
 
+  const bulletsContainer = shouldReduceMotion
+    ? { hidden: {}, visible: {} }
+    : { hidden: {}, visible: { transition: { staggerChildren: 0.11 } } };
+
+  const bulletItem = shouldReduceMotion
+    ? { hidden: {}, visible: {} }
+    : {
+        hidden: { opacity: 0, y: 10 },
+        visible: { opacity: 1, y: 0, transition: { duration: 0.45, ease: [0.22, 1, 0.36, 1] as const } }
+      };
+
+  const handlePointerMove = (event: ReactPointerEvent<HTMLElement>) => {
+    if (!isPointerInteractive) return;
+
+    const rect = event.currentTarget.getBoundingClientRect();
+    const pointerX = (event.clientX - rect.left) / rect.width - 0.5;
+    const pointerY = (event.clientY - rect.top) / rect.height - 0.5;
+
+    backgroundX.set(pointerX * 10);
+    lightX.set(pointerX * 20);
+    lightY.set(pointerY * 14);
+  };
+
+  const resetPointerDepth = () => {
+    backgroundX.set(0);
+    lightX.set(0);
+    lightY.set(0);
+  };
+
   return (
     <section
       ref={sectionRef}
       id="hero-section"
       className="on-dark relative pt-28 md:pt-36 pb-20 md:pb-28 lg:pb-36 bg-forest-950 overflow-hidden"
+      onPointerMove={isPointerInteractive ? handlePointerMove : undefined}
+      onPointerLeave={isPointerInteractive ? resetPointerDepth : undefined}
     >
       {/* Background Image with optimized dark overlay gradient */}
       <motion.div className="absolute inset-0 z-0" style={shouldReduceMotion ? undefined : { y: backgroundY }}>
-        <img
-          id="hero-bg-image"
-          src={heroImage.src}
-          srcSet={heroImage.srcSet}
-          sizes="100vw"
-          width={heroImage.width}
-          height={heroImage.height}
-          alt="Арборист спиливает ветви сосны на высоте"
-          fetchPriority="high"
-          decoding="async"
-          className="w-full h-full object-cover object-center opacity-40 animate-ken-burns"
-          referrerPolicy="no-referrer"
-        />
+        <motion.div className="absolute inset-0" style={isPointerInteractive ? { x: backgroundX } : undefined}>
+          <img
+            id="hero-bg-image"
+            src={heroImage.src}
+            srcSet={heroImage.srcSet}
+            sizes="100vw"
+            width={heroImage.width}
+            height={heroImage.height}
+            alt="Арборист спиливает ветви сосны на высоте"
+            fetchPriority="high"
+            decoding="async"
+            className="w-full h-full object-cover object-center opacity-40 animate-ken-burns"
+            referrerPolicy="no-referrer"
+          />
+        </motion.div>
         <div className="absolute inset-0 bg-gradient-to-r from-forest-950/95 via-forest-950/80 to-transparent z-10" />
         <div className="absolute inset-0 bg-gradient-to-t from-forest-950 via-transparent to-transparent z-10" />
       </motion.div>
+
+      <motion.div
+        aria-hidden="true"
+        className="hero-canopy-light pointer-events-none absolute inset-0 z-[11]"
+        style={isPointerInteractive ? { x: lightX, y: lightY } : undefined}
+      />
 
       <motion.div
         className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
@@ -138,13 +183,13 @@ export default function Hero({ onOpenCallbackModal, onScrollToCalculator }: Hero
           {/* Bullet Points Grid */}
           <motion.div
             id="hero-trust-bullets"
-            variants={item}
+            variants={bulletsContainer}
             className="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-8 border-t border-white/10"
           >
             {BULLETS.map((bullet) => {
               const Icon = bullet.icon;
               return (
-                <div key={bullet.title} className="flex items-start space-x-3">
+                <motion.div key={bullet.title} variants={bulletItem} className="flex items-start space-x-3">
                   <div className="p-1 bg-forest-500/20 text-forest-400 rounded-btn mt-0.5">
                     <Icon className="w-5 h-5" />
                   </div>
@@ -152,7 +197,7 @@ export default function Hero({ onOpenCallbackModal, onScrollToCalculator }: Hero
                     <h4 className="text-sm font-semibold text-white">{bullet.title}</h4>
                     <p className="text-xs text-forest-100/60 mt-1">{bullet.text}</p>
                   </div>
-                </div>
+                </motion.div>
               );
             })}
           </motion.div>

@@ -64,6 +64,7 @@
   /* Real keyframes. The codebase previously referenced animate-pulse-slow,
      animate-fade-in and animate-in, none of which ever existed. */
   --animate-ken-burns: ken-burns 24s ease-in-out infinite alternate;
+  --animate-canopy-light: canopy-light 22s ease-in-out infinite alternate;
   --animate-sway: sway 6s ease-in-out infinite;
   --animate-fade-up: fade-up 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
   --animate-drawer-in: drawer-in 0.22s cubic-bezier(0.22, 1, 0.36, 1) both;
@@ -77,6 +78,11 @@
   @keyframes ken-burns {
     from { transform: scale(1.04) translate3d(0, 0, 0); }
     to   { transform: scale(1.14) translate3d(-1.5%, -1.5%, 0); }
+  }
+
+  @keyframes canopy-light {
+    from { background-position: 78% 8%, 118% 0; }
+    to   { background-position: 64% 22%, 72% 0; }
   }
 
   @keyframes sway {
@@ -144,6 +150,17 @@
   background: linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.6) 100%);
 }
 
+/* A quiet daylight shift through the canopy. It stays on the photo side of the
+   hero and uses gradients rather than a blur filter to keep scrolling smooth. */
+.hero-canopy-light {
+  background:
+    radial-gradient(ellipse 48% 55% at 78% 8%, rgb(232 228 217 / 0.14), transparent 72%),
+    linear-gradient(118deg, transparent 38%, rgb(167 188 166 / 0.09) 52%, transparent 66%);
+  background-size: 120% 120%, 165% 100%;
+  background-position: 78% 8%, 118% 0;
+  animation: var(--animate-canopy-light);
+}
+
 .text-stroke {
   -webkit-text-stroke: 1px currentColor;
 }
@@ -160,5 +177,9 @@
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+
+  .hero-canopy-light {
+    animation: none;
   }
 }
